@@ -1,0 +1,18 @@
+Timeline of the trip
+
+GeoFencing
+
+Details about the current location
+
+Available means of transport
+
+Resorts/Hotels nearby
+
+Emergency Support
+    -Alerts local Police station when shook the mobile phone 3 times up and down.
+    -When signals are lost suddenly, prompts whether it's emergency or casual.
+    -And will think about more later.
+
+Contact of Emergency Supports
+
+etc.

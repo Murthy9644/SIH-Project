@@ -1,0 +1,41 @@
+Desktop:
+    Screen 1:
+        Authority Login- Only specific persons with authority permission can access this application
+        Contents:
+            Authorized id no. Input Box
+            PassWord Input Box
+            Login
+
+    Screen 2:
+        Details form- A form to enter the details of the tourist.
+        Contents:
+            Form
+            Print option - To print the details into pdf
+            Generate - To generate the QR and TravelId
+
+    Screen 3:
+        Generated QR and TravelId.
+        Contents:
+            QR
+            TravelId
+
+
+Android:
+    Screen 1: [If app installed from QR scann]
+        Welcome Screen and then
+        Go to Screen 2
+
+    Screen 1: [If app is installed manually]
+        Welcome Screen and then
+        QR scan or TravelId option
+
+    Screen 2:
+        contains features
+
+    Screen 3: [At the end of the trip]
+        A heartwarming msg.
+
+
+    Styling-frontend:
+        background-color: rgb(25, 169, 226)
+        secondary background-color: white

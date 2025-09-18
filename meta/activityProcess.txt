@@ -1,0 +1,20 @@
+Phase-Registration:
+    [On Desktop app] Given the data of a tourist, Unique and disposable TravelId will be generated in the forma of a QR.
+        Details required [as per Passport/Aadhar]:
+            -Name
+            -Phone No.
+            -Date of birth
+            -Plan of the trip
+            -Duration of th trip
+            And others will be added as required.
+
+Phase-Log In:
+    [On Android app] Tourist scans the generated QR to install the app {If not done earlier} and access their account {Once accessed, they can't login again without authorities consideration}. 
+
+Phase-Usage:
+    Tourists can use this app as a personal guide throughout their trip, which ensures their safety, well-ness and Does many jobs as discussed in the featues.txt.
+
+
+Backend:
+    The tourist data is securely retained by the designated authorities and will be automatically deleted after the trip ends.
+    Uses Blockchain to store the Tourist data.
