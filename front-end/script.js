@@ -115,7 +115,7 @@ let detailsScreenHTML = `
                 </div>
     
                 <div id="details-destination">
-                    <h5>Designation</h5>
+                    <h5>Destination</h5>
                     <input type="text" placeholder="Enter travel destination" name = "destination">
                 </div>
     
@@ -141,14 +141,19 @@ let detailsScreenHTML = `
     
         <div id="details-foot-buttons">
             <button id = cancelBtn>Cancel</button>
-            <button id = generateBtn>Generate QR & Travel ID</button>
+            <button id = generateBtn onclick = "handleDetails2QR()">Generate QR & Travel ID</button>
         </div>
     </div>
 `
 
+let qrScreenHTML = `
+    
+`
+
+
 // Handles Screen change based on credential check
 async function handleChangeScreen(currentpage, nextpage){
-
+    
     let credCheckStatus = await loginCredCheck(currentpage)
     
     if (credCheckStatus){
@@ -165,7 +170,7 @@ function closeDiv(){
 function changePage(page, credCheckStatus = true){
 
     if (! credCheckStatus) return
-
+    
     switch (page){
         case "loginScreen":
             let body = document.getElementById("body")
@@ -174,13 +179,13 @@ function changePage(page, credCheckStatus = true){
             body.innerHTML = loginScreenHTML
             break
 
-        case "detailsScreen":
+            case "detailsScreen":
             let body2 = document.getElementById("body")
             body2.style.background = "none"
             body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
             body2.innerHTML = detailsScreenHTML
             break
-    }
+        }
 }
 
 // Checks if all required credentials are filled before changing the page
@@ -191,7 +196,7 @@ async function loginCredCheck(page){
             let id = document.querySelector("input[name='id']")
             let pswd = document.querySelector("input[name='password']")
             let captcha = document.querySelector('input[name = "captcha"')
-
+            
             let loginData = {
                 id: id ? id.value : '',
                 pswd: pswd ? pswd.value : '',
@@ -199,7 +204,7 @@ async function loginCredCheck(page){
             }
 
             let response = await window.pywebview.api.widutils.credCheck(loginData, page)
-
+            
             if (! response){
                 document.getElementById("alertBox").innerHTML = `
                 <div id="alert">
@@ -213,11 +218,10 @@ async function loginCredCheck(page){
 
             break
 
-        case "detailsScreen":
+            case "detailsScreen":
             let fullname = document.querySelector('input[name = "fullname"]')
             let phoneNo = document.querySelector('input[name = "phoneNo"]')
             let dob = document.querySelector('input[name = "dob"]')
-            let destination = document.querySelector('input[name = "destination"]')
             let tripFromDate = document.querySelector('input[name = "trip-from-date"]')
             let tripToDate = document.querySelector('input[name = "trip-to-date"]')
             let tripReason = document.querySelector('input[name = "tripReason"]')
@@ -226,15 +230,13 @@ async function loginCredCheck(page){
                 fullname: fullname ? fullname.value : '',
                 phoneNo: phoneNo ? phoneNo.value : '',
                 dob: dob ? dob.value : '',
-                destination: destination ? destination.value : '',
                 tripFromDate: tripFromDate ? tripFromDate.value : '',
                 tripToDate: tripToDate ? tripToDate.value : '',
                 tripReason: tripReason ? tripReason.value : '',
-                emergencyPhn: emergencyPhn ? emergencyPhn.value : ''
             }
 
             let response2 = await window.pywebview.api.widutils.credCheck(detailsData, page)
-
+            
             if (! response2){
                 document.getElementById("alertBox").innerHTML = `
                 <div id="alert">
@@ -247,10 +249,37 @@ async function loginCredCheck(page){
             }
 
             break
-    
+            
             default:
             break
+        }
+
+        return true
+    }
+//Handles Details to QR code generation
+async function handleDetails2QR(){
+    let credCheckStatus = await loginCredCheck("detailsScreen")
+        
+    if (! credCheckStatus) return
+    
+    document.getElementById("generateBtn").innerText = "Generating QR..."
+    document.getElementById("generateBtn").style.color = "rgba(220, 220, 220, 0.7)"
+    document.getElementById("generateBtn").style.cursor = "not-allowed"
+    document.getElementById("generateBtn").disabled = true
+
+    let tidNo = Date.now()
+    
+    let detailsData = {
+        fullname: document.querySelector('input[name = "fullname"]').value,
+        phoneNo: document.querySelector('input[name = "phoneNo"]').value,
+        dob: document.querySelector('input[name = "dob"]').value,
+        nationality: document.querySelector('input[name = "nation"]').value,
+        destination: document.querySelector('input[name = "destination"]').value,
+        duration: [document.querySelector('input[name = "trip-from-date"]').value, document.querySelector('input[name = "trip-to-date"]').value],
+        tripReason: document.querySelector('input[name = "tripReason"]').value,
+        emergencyContact: document.querySelector('input[name = "emergencyPhn"]').value
     }
 
-    return true
+    let tid = `${detailsData["fullname"][0]}-${tidNo}`
+    let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
 }

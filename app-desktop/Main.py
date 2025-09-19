@@ -2,11 +2,13 @@ import webview
 from screeninfo import get_monitors
 from ui.stylesheet import sheet
 from ui.utils.Utils import widUtils
+from backend.dataTransfer import DataTransfer
 
 class TripPilot:
 
     def __init__(self):
         self.widutils = widUtils()
+        self.dataTransfer = DataTransfer()
 
 
 api = TripPilot()
