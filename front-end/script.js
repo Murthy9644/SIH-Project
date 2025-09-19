@@ -1,5 +1,9 @@
 // Animations
 
+// Global variables
+let tid = ""
+let detailsData = {}
+
 // HTML structure for login screen
 let loginScreenHTML = `
     <div id="alertBox"></div>
@@ -147,7 +151,92 @@ let detailsScreenHTML = `
 `
 
 let qrScreenHTML = `
-    
+        <div id="qrScreen">
+        <div id="qr-header">
+            <div id="qr-header-text">
+                <h2>Tourist Registration Complete</h2>
+
+                <p>QR Code & Travel ID generated successfully</p>
+            </div>
+
+            <div id="qr-header-btns">
+                <button id = "back-btn"><i class="fa-solid fa-arrow-left" style="font-size: 10px; position: relative; top: -1px;"></i> Back to Form</button>
+                <button id = "New-reg-btn">New Registration</button>
+            </div>
+        </div>
+
+        <div id="qr-details-container">
+            <div id="qr-code-container">
+                <div id="qr-code-header">
+                    <h3><i class="fa-solid fa-qrcode" style="color: rgb(94, 94, 252);"></i> Generated QR Code</h3>
+
+                    <p>Scan this QR code to access the mobile application</p>
+                </div>
+
+                <div id="qr-code-image">
+
+                </div>
+
+                <div id="qr-bottom-text">
+                    <p>This QR code contains encrypted tourist data</p>
+                    <p>for sceure access to the mobile application</p>
+                </div>
+            </div>
+
+            <div id="qr-tid-details-container">
+                <div id="tid-header">
+                    <h3><i class="fa-regular fa-square-check" style="color: rgb(4, 219, 4); font-size: 20px;"></i> Travel ID Generated</h3>
+                    
+                    <p>Unique identifier for this tourist registration</p>
+                </div>
+
+                <div id="tid-number">
+                    <h5>Travel ID</h5>
+
+                    <div id="number-container">
+                        <div id="number"></div>
+
+                        <button id="copy-btn"><i class="fa-solid fa-clone"></i></button>
+                    </div>
+                </div>
+
+                <div id="tourist-details">
+                    <h5>Tourist Information</h5>
+
+                    <div>
+                        <p id="field-name">Name:</p>
+                        <p id="value"></p>
+                    </div>
+
+                    <div>
+                        <p id="field-name">Phone:</p>
+                        <p id="value"></p>
+                    </div>
+
+                    <div>
+                        <p id="field-name">Destination:</p>
+                        <p id="value"></p>
+                    </div>
+
+                    <div>
+                        <p id="field-name">Duration:</p>
+                        <p id="value"></p>
+                    </div>
+
+                    <div>
+                        <p id="field-name">Registration:</p>
+                        <p id="value"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bottom-btns">
+            <button id="download"><i class="fa-solid fa-download"></i> Download PDF</button>
+
+            <button id="print"><i class="fa-solid fa-print"></i> Print</button>
+        </div>
+    </div>
 `
 
 
@@ -173,18 +262,31 @@ function changePage(page, credCheckStatus = true){
     
     switch (page){
         case "loginScreen":
-            let body = document.getElementById("body")
-            body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
-            body.style.backgroundColor = "transparent"
-            body.innerHTML = loginScreenHTML
-            break
+                let body = document.getElementById("body")
+                body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
+                body.style.backgroundColor = "transparent"
+                body.innerHTML = loginScreenHTML
+                break
 
             case "detailsScreen":
-            let body2 = document.getElementById("body")
-            body2.style.background = "none"
-            body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-            body2.innerHTML = detailsScreenHTML
-            break
+                let body2 = document.getElementById("body")
+                body2.style.background = "none"
+                body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+                body2.innerHTML = detailsScreenHTML
+                break
+
+            case "qrScreen":
+                let body3 = document.getElementById("body")
+                body3.innerHTML = qrScreenHTML
+                document.getElementById("qr-code-image").innerHTML = `<img src="./assets/qr_codes/${tid}.png" alt="QR Code">`
+                document.getElementById("number").innerText = tid
+                document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
+                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
+                document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
+                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
+                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+                document.getElementById("body").style.background = "none"
+                break
         }
 }
 
@@ -195,7 +297,7 @@ async function loginCredCheck(page){
         case "loginScreen":
             let id = document.querySelector("input[name='id']")
             let pswd = document.querySelector("input[name='password']")
-            let captcha = document.querySelector('input[name = "captcha"')
+            let captcha = document.querySelector('input[name = "captcha"]')
             
             let loginData = {
                 id: id ? id.value : '',
@@ -269,7 +371,7 @@ async function handleDetails2QR(){
 
     let tidNo = Date.now()
     
-    let detailsData = {
+    detailsData = {
         fullname: document.querySelector('input[name = "fullname"]').value,
         phoneNo: document.querySelector('input[name = "phoneNo"]').value,
         dob: document.querySelector('input[name = "dob"]').value,
@@ -280,6 +382,13 @@ async function handleDetails2QR(){
         emergencyContact: document.querySelector('input[name = "emergencyPhn"]').value
     }
 
-    let tid = `${detailsData["fullname"][0]}-${tidNo}`
+    tid = `${detailsData["fullname"][0]}-${tidNo}`
     let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
+
+    if (dataTransferStatus == "success") changePage("qrScreen", true)
+
+    document.getElementById("generateBtn").innerText = "Generate QR & Travel ID"
+    document.getElementById("generateBtn").style.color = "white"
+    document.getElementById("generateBtn").style.cursor = "pointer"
+    document.getElementById("generateBtn").disabled = false
 }

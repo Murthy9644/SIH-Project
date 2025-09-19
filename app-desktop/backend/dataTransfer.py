@@ -22,8 +22,6 @@ class DataTransfer:
             "data": data
         }
 
-        print(details)
-
         response = requests.post(self.url + f"/write/touristData.json", json = details)
         QRGenerator(details)
 
@@ -31,4 +29,3 @@ class DataTransfer:
     
     def __init__(self):
         self.url = f"http://{self.getIPV4()}:5500"
-        print(self.url)

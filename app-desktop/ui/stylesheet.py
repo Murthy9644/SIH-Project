@@ -387,6 +387,227 @@ sheet = '''
 		    outline: 1px solid black;
 		}
 		
+		
+		/* QR Screen */
+		
+		#qrScreen{
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-evenly;
+		    flex-direction: column;
+		    height: 100vh;
+		    width: auto;
+		}
+		
+		#qr-header{
+		    height: auto;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-around;
+		    line-height: 0;
+		}
+		
+		#qr-header-text{
+		    height: 80px;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-around;
+		}
+		
+		#qr-header-text p{
+		    font-size: 13px;
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#qr-header-btns{
+		    height: 40px;
+		    width: 360px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    gap: 8px;
+		}
+		
+		#qr-header-btns button{
+		    border: 0.5px solid rgba(0, 0, 0, 0.1);
+		    border-radius: 5px;
+		    height: 40px;
+		    width: 120px;
+		}
+		
+		#back-btn{
+		    background-color: transparent;
+		}
+		
+		#New-reg-btn{
+		    background-color: rgb(25, 169, 226);
+		    color: white;
+		}
+		
+		#qr-details-container{
+		    width: 100%;
+		    display: flex;
+		    justify-content: center;
+		    gap: 50px;
+		}
+		
+		#qr-code-container, #qr-tid-details-container{
+		    width: 450px;
+		    background-color: white;
+		    padding: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-evenly;
+		    flex-direction: column;
+		    gap: 10px;
+		    border-radius: 8px;
+		    filter: drop-shadow(1px 1px 8px rgba(0, 0, 0, 0.1));
+		}
+		
+		#qr-tid-details-container{
+		    gap: 25px;
+		}
+		
+		#qr-code-header{
+		    display: flex;
+		    flex-direction: column;
+		    line-height: 0;
+		    align-items: center;
+		    justify-content: center;
+		    line-height: 0;
+		}
+		
+		#qr-code-header p{
+		    font-size: 13px;
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#qr-code-image{
+		    width: 250px;
+		    height: 270px;
+		    background-color: white;
+		    filter: drop-shadow(1px 1px 15px rgba(0, 0, 0, 0.3));
+		    border-radius: 8px;
+		}
+		
+		#qr-bottom-text{
+		    display: flex;
+		    flex-direction: column;
+		    line-height: 0;
+		    align-items: center;
+		    justify-content: center;
+		}
+		
+		#qr-bottom-text p{
+		    font-size: 13px;
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#tid-header{
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    line-height: 0;
+		    width: 100%;
+		}
+		
+		#tid-header p{
+		    font-size: 13px;
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#tid-number{
+		    display: flex;
+		    flex-direction: column;
+		    line-height: 0;
+		    width: 100%;
+		}
+		
+		#number-container{
+		    height: 50px;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    gap: 5px;
+		}
+		
+		#number{
+		    height: 40px;
+		    width: 100%;
+		    background-color: rgba(70, 70, 238, 0.3);
+		    color: darkblue;
+		    font-weight: 600;
+		    display: flex;
+		    align-items: center;
+		    justify-content: left;
+		    padding-left: 10px;
+		    letter-spacing: 2px;
+		    border-radius: 8px;
+		}
+		
+		#copy-btn{
+		    height: 35px;
+		    width: 40px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    font-size: 16px;
+		    background-color: rgba(185, 184, 184, 0.3);
+		    border: none;
+		    border-radius: 8px;
+		    color: rgb(112, 112, 112);
+		}#copy-btn:active{
+		    background-color: greenyellow;
+		}
+		
+		#qrScreem:focus{
+		    outline: 1px solid black;
+		}
+		
+		#tourist-details{
+		    width: 100%;
+		}
+		
+		#tourist-details div{
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		    line-height: 0;
+		}
+		
+		#tourist-details p{
+		    font-size: 13px;
+		    font-weight: 600;
+		}
+		
+		#field-name{
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#bottom-btns{
+		    height: 50px;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    gap: 15px;
+		}
+		
+		#bottom-btns button{
+		    border: 0.5px solid rgba(0, 0, 0, 0.1);
+		    border-radius: 8px;
+		    height: 35px;
+		    width: auto;
+		    padding-left: 20px;
+		    padding-right: 20px;
+		}
+		
+		#qrScreen button:focus{
+		    outline: 1px solid black;
+		}
+		
+		
 		/* Responsive adjustments */
 		@media (max-width: 600px) {
 		  #login-container {
@@ -500,6 +721,10 @@ sheet = '''
 
 	<script>
 		// Animations
+		
+		// Global variables
+		let tid = ""
+		let detailsData = {}
 		
 		// HTML structure for login screen
 		let loginScreenHTML = `
@@ -647,6 +872,95 @@ sheet = '''
 		    </div>
 		`
 		
+		let qrScreenHTML = `
+		        <div id="qrScreen">
+		        <div id="qr-header">
+		            <div id="qr-header-text">
+		                <h2>Tourist Registration Complete</h2>
+		
+		                <p>QR Code & Travel ID generated successfully</p>
+		            </div>
+		
+		            <div id="qr-header-btns">
+		                <button id = "back-btn"><i class="fa-solid fa-arrow-left" style="font-size: 10px; position: relative; top: -1px;"></i> Back to Form</button>
+		                <button id = "New-reg-btn">New Registration</button>
+		            </div>
+		        </div>
+		
+		        <div id="qr-details-container">
+		            <div id="qr-code-container">
+		                <div id="qr-code-header">
+		                    <h3><i class="fa-solid fa-qrcode" style="color: rgb(94, 94, 252);"></i> Generated QR Code</h3>
+		
+		                    <p>Scan this QR code to access the mobile application</p>
+		                </div>
+		
+		                <div id="qr-code-image">
+		
+		                </div>
+		
+		                <div id="qr-bottom-text">
+		                    <p>This QR code contains encrypted tourist data</p>
+		                    <p>for sceure access to the mobile application</p>
+		                </div>
+		            </div>
+		
+		            <div id="qr-tid-details-container">
+		                <div id="tid-header">
+		                    <h3><i class="fa-regular fa-square-check" style="color: rgb(4, 219, 4); font-size: 20px;"></i> Travel ID Generated</h3>
+		                    
+		                    <p>Unique identifier for this tourist registration</p>
+		                </div>
+		
+		                <div id="tid-number">
+		                    <h5>Travel ID</h5>
+		
+		                    <div id="number-container">
+		                        <div id="number"></div>
+		
+		                        <button id="copy-btn"><i class="fa-solid fa-clone"></i></button>
+		                    </div>
+		                </div>
+		
+		                <div id="tourist-details">
+		                    <h5>Tourist Information</h5>
+		
+		                    <div>
+		                        <p id="field-name">Name:</p>
+		                        <p id="value"></p>
+		                    </div>
+		
+		                    <div>
+		                        <p id="field-name">Phone:</p>
+		                        <p id="value"></p>
+		                    </div>
+		
+		                    <div>
+		                        <p id="field-name">Destination:</p>
+		                        <p id="value"></p>
+		                    </div>
+		
+		                    <div>
+		                        <p id="field-name">Duration:</p>
+		                        <p id="value"></p>
+		                    </div>
+		
+		                    <div>
+		                        <p id="field-name">Registration:</p>
+		                        <p id="value"></p>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div id="bottom-btns">
+		            <button id="download"><i class="fa-solid fa-download"></i> Download PDF</button>
+		
+		            <button id="print"><i class="fa-solid fa-print"></i> Print</button>
+		        </div>
+		    </div>
+		`
+		
 		
 		// Handles Screen change based on credential check
 		async function handleChangeScreen(currentpage, nextpage){
@@ -670,18 +984,31 @@ sheet = '''
 		    
 		    switch (page){
 		        case "loginScreen":
-		            let body = document.getElementById("body")
-		            body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
-		            body.style.backgroundColor = "transparent"
-		            body.innerHTML = loginScreenHTML
-		            break
+		                let body = document.getElementById("body")
+		                body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
+		                body.style.backgroundColor = "transparent"
+		                body.innerHTML = loginScreenHTML
+		                break
 		
 		            case "detailsScreen":
-		            let body2 = document.getElementById("body")
-		            body2.style.background = "none"
-		            body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-		            body2.innerHTML = detailsScreenHTML
-		            break
+		                let body2 = document.getElementById("body")
+		                body2.style.background = "none"
+		                body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+		                body2.innerHTML = detailsScreenHTML
+		                break
+		
+		            case "qrScreen":
+		                let body3 = document.getElementById("body")
+		                body3.innerHTML = qrScreenHTML
+		                document.getElementById("qr-code-image").innerHTML = `<img src="./assets/qr_codes/${tid}.png" alt="QR Code">`
+		                document.getElementById("number").innerText = tid
+		                document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
+		                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
+		                document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
+		                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
+		                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+		                document.getElementById("body").style.background = "none"
+		                break
 		        }
 		}
 		
@@ -692,7 +1019,7 @@ sheet = '''
 		        case "loginScreen":
 		            let id = document.querySelector("input[name='id']")
 		            let pswd = document.querySelector("input[name='password']")
-		            let captcha = document.querySelector('input[name = "captcha"')
+		            let captcha = document.querySelector('input[name = "captcha"]')
 		            
 		            let loginData = {
 		                id: id ? id.value : '',
@@ -777,8 +1104,15 @@ sheet = '''
 		        emergencyContact: document.querySelector('input[name = "emergencyPhn"]').value
 		    }
 		
-		    let tid = `${detailsData["fullname"][0]}-${tidNo}`
-		    let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
+		    tid = `${detailsData["fullname"][0]}-${tidNo}`
+		    dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
+		
+		    if (dataTransferStatus == "success") changePage("qrScreen", true)
+		
+		    document.getElementById("generateBtn").innerText = "Generate QR & Travel ID"
+		    document.getElementById("generateBtn").style.color = "white"
+		    document.getElementById("generateBtn").style.cursor = "pointer"
+		    document.getElementById("generateBtn").disabled = false
 		}
 	</script>
 </body>
