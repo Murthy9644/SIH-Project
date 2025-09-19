@@ -14,7 +14,9 @@ body{
     padding: 0;
     margin: 0;
     background: linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226));
+    background: none;
     font-family: 'Poppins', Arial, sans-serif;
+    background-color: rgba(157, 157, 201, 0.2);
 }
 
 #temp{
@@ -375,6 +377,49 @@ body{
     background-color: rgb(23, 136, 177);
 }#generateBtn:focus{
     outline: 1px solid black;
+}
+
+
+/* QR Screen */
+
+#qrScreen{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100vh;
+    width: auto;
+}
+
+#qr-header{
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    line-height: 0;
+}
+
+#qr-header-text{
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#qr-header-text p{
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#qr-header-btns{
+    height: 30px;
+    display: flex;
+    gap: 8px;
+}
+
+#qr-header-btns button{
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive adjustments */
