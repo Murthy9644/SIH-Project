@@ -3,29 +3,33 @@ import requests
 
 class DataTransfer:
 
-    def getIPV4(self):
-        import socket
-
-        socky = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-        try:
-            socky.connect(("8.8.8.8", 80))
-            ip = socky.getsockname()[0]
-
-        finally: socky.close()
-
-        return ip
-
     def sendData(self, data, tid):
-        details = {
+        self.details = {
             "tid": tid, 
             "data": data
         }
 
-        response = requests.post(self.url + f"/write/touristData.json", json = details)
-        QRGenerator(details)
+        dataResponse = requests.post(self.serverIP + f"/write/touristData.json", json = self.details)
+        self.qrGenInst = QRGenerator(self.details)
+        self.qrPath = self.qrGenInst.qrPath
+        qrResponse = self.sendQR()
 
-        return response.text
+        return [dataResponse.text, qrResponse, self.serverIP]
+
+    def sendQR(self):
+
+        try:
+            with open(self.qrPath, 'rb') as image: 
+                response = requests.post(self.serverIP + f"/upload/{self.details["tid"]}.png", files = {"image": image})
+                print(response.text)
+
+            return response.text
+
+        except Exception as e:
+            response = "QR-upload-failed"
+            print(response, e)
+            
+            return response
     
-    def __init__(self):
-        self.url = f"http://{self.getIPV4()}:5500"
+    def __init__(self, serverIP):
+        self.serverIP = serverIP

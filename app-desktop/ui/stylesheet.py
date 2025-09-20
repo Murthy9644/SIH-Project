@@ -485,10 +485,14 @@ sheet = '''
 		
 		#qr-code-image{
 		    width: 250px;
-		    height: 270px;
+		    height: 250px;
 		    background-color: white;
 		    filter: drop-shadow(1px 1px 15px rgba(0, 0, 0, 0.3));
 		    border-radius: 8px;
+		    background-image: none;
+		    background-position: center;
+		    background-size: cover;
+		    background-repeat: no-repeat;
 		}
 		
 		#qr-bottom-text{
@@ -725,6 +729,7 @@ sheet = '''
 		// Global variables
 		let tid = ""
 		let detailsData = {}
+		let serverIP = ""
 		
 		// HTML structure for login screen
 		let loginScreenHTML = `
@@ -895,9 +900,7 @@ sheet = '''
 		                    <p>Scan this QR code to access the mobile application</p>
 		                </div>
 		
-		                <div id="qr-code-image">
-		
-		                </div>
+		                <div id="qr-code-image"></div>
 		
 		                <div id="qr-bottom-text">
 		                    <p>This QR code contains encrypted tourist data</p>
@@ -1000,7 +1003,6 @@ sheet = '''
 		            case "qrScreen":
 		                let body3 = document.getElementById("body")
 		                body3.innerHTML = qrScreenHTML
-		                document.getElementById("qr-code-image").innerHTML = `<img src="./assets/qr_codes/${tid}.png" alt="QR Code">`
 		                document.getElementById("number").innerText = tid
 		                document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
 		                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
@@ -1008,6 +1010,7 @@ sheet = '''
 		                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
 		                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
 		                document.getElementById("body").style.background = "none"
+		                document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
 		                break
 		        }
 		}
@@ -1093,7 +1096,7 @@ sheet = '''
 		
 		    let tidNo = Date.now()
 		    
-		    let detailsData = {
+		    detailsData = {
 		        fullname: document.querySelector('input[name = "fullname"]').value,
 		        phoneNo: document.querySelector('input[name = "phoneNo"]').value,
 		        dob: document.querySelector('input[name = "dob"]').value,
@@ -1105,9 +1108,12 @@ sheet = '''
 		    }
 		
 		    tid = `${detailsData["fullname"][0]}-${tidNo}`
-		    dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
+		    let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
 		
-		    if (dataTransferStatus == "success") changePage("qrScreen", true)
+		    if (dataTransferStatus[0] == "success" && dataTransferStatus[1] == "success"){
+		        serverIP = dataTransferStatus[2]
+		        changePage("qrScreen", true)
+		    }
 		
 		    document.getElementById("generateBtn").innerText = "Generate QR & Travel ID"
 		    document.getElementById("generateBtn").style.color = "white"
