@@ -1008,11 +1008,11 @@ sheet = '''
 		                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
 		                document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
 		                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
-		                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
 		                document.getElementById("body").style.background = "none"
+		                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
 		                document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
 		                break
-		        }
+		    }
 		}
 		
 		// Checks if all required credentials are filled before changing the page
