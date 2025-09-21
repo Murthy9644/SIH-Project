@@ -72,8 +72,9 @@ sheet = '''
 		    height: 100vh;
 		    width: 100vw;
 		    display: flex;
+		    flex-direction: column;
 		    align-items: center;
-		    justify-content: center;
+		    justify-content: space-evenly;
 		}
 		
 		#login-screen-child{
@@ -238,6 +239,7 @@ sheet = '''
 		#details-screen{
 		    display: flex;
 		    flex-direction: column;
+		    justify-content: space-evenly;
 		    width: 100vw;
 		    height: 100vh;
 		}
@@ -674,9 +676,9 @@ sheet = '''
     <div id="alertBox"></div>
 
     <div id="login-screen">
+        <div id="reg-btn"><button>Register</button></div>
+
         <div id = "login-screen-child">
-            <div id="reg-btn"><button>Register</button></div>
-            
             <div id="login-header">
                 <div id="login-header-shield">
                     <i class="fa-solid fa-shield"></i>
@@ -1017,6 +1019,7 @@ sheet = '''
 		
 		// Checks if all required credentials are filled before changing the page
 		async function loginCredCheck(page){
+		    serverIP = await window.pywebview.api.widutils.getServerIP()
 		
 		    switch (page){
 		        case "loginScreen":
@@ -1036,6 +1039,19 @@ sheet = '''
 		                document.getElementById("alertBox").innerHTML = `
 		                <div id="alert">
 		                    <p>Fill all the required credentials before submitting.</p>
+		                    <button onclick="closeDiv()">OK</button>
+		                </div>
+		                `
+		
+		                return false
+		            }
+		
+		            let loginInfo = await window.pywebview.api.dataTransfer.getLoginInfo(loginData["id"])
+		
+		            if ((! loginInfo[0]) || (loginInfo[1] != loginData["pswd"])){
+		                document.getElementById("alertBox").innerHTML = `
+		                <div id="alert">
+		                    <p>Incorrect Login Credentials</p>
 		                    <button onclick="closeDiv()">OK</button>
 		                </div>
 		                `
@@ -1111,7 +1127,6 @@ sheet = '''
 		    let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
 		
 		    if (dataTransferStatus[0] == "success" && dataTransferStatus[1] == "success"){
-		        serverIP = dataTransferStatus[2]
 		        changePage("qrScreen", true)
 		    }
 		

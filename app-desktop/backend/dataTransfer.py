@@ -14,7 +14,7 @@ class DataTransfer:
         self.qrPath = self.qrGenInst.qrPath
         qrResponse = self.sendQR()
 
-        return [dataResponse.text, qrResponse, self.serverIP]
+        return [dataResponse.text, qrResponse]
 
     def sendQR(self):
 
@@ -30,6 +30,11 @@ class DataTransfer:
             print(response, e)
             
             return response
+        
+    def getLoginInfo(self, id):
+        response = requests.get(f"{self.serverIP}/getLoginInfo/{id}")
+
+        return response.json()
     
     def __init__(self, serverIP):
         self.serverIP = serverIP

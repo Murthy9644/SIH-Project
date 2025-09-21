@@ -16,3 +16,9 @@ class widUtils:
                     if value == '': return False
 
         return True
+    
+    def getServerIP(self):
+        return self.serverIP
+    
+    def __init__(self, serverIP):
+        self.serverIP = serverIP

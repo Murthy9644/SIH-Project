@@ -291,6 +291,7 @@ function changePage(page, credCheckStatus = true){
 
 // Checks if all required credentials are filled before changing the page
 async function loginCredCheck(page){
+    serverIP = await window.pywebview.api.widutils.getServerIP()
 
     switch (page){
         case "loginScreen":
@@ -310,6 +311,19 @@ async function loginCredCheck(page){
                 document.getElementById("alertBox").innerHTML = `
                 <div id="alert">
                     <p>Fill all the required credentials before submitting.</p>
+                    <button onclick="closeDiv()">OK</button>
+                </div>
+                `
+
+                return false
+            }
+
+            let loginInfo = await window.pywebview.api.dataTransfer.getLoginInfo(loginData["id"])
+
+            if ((! loginInfo[0]) || (loginInfo[1] != loginData["pswd"])){
+                document.getElementById("alertBox").innerHTML = `
+                <div id="alert">
+                    <p>Incorrect Login Credentials</p>
                     <button onclick="closeDiv()">OK</button>
                 </div>
                 `
@@ -385,7 +399,6 @@ async function handleDetails2QR(){
     let dataTransferStatus = await window.pywebview.api.dataTransfer.sendData(detailsData, tid)
 
     if (dataTransferStatus[0] == "success" && dataTransferStatus[1] == "success"){
-        serverIP = dataTransferStatus[2]
         changePage("qrScreen", true)
     }
 

@@ -8,7 +8,6 @@ from server_config.findServer import FindServer
 class TripPilot:
 
     def __init__(self):
-        self.widutils = widUtils()
 
         try:
             self.server = FindServer()
@@ -19,6 +18,7 @@ class TripPilot:
             sys.exit()
 
         self.dataTransfer = DataTransfer(self.serverIP)
+        self.widutils = widUtils(self.serverIP)
 
 
 api = TripPilot()
