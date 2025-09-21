@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Travel App Welcome</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .bg-primary {
+        background-color: rgb(25, 169, 226);
+      }
+      .text-secondary {
+        color: white;
+      }
+      .btn {
+        @apply flex items-center justify-center gap-2 w-full text-center rounded-xl px-6 py-4 text-lg font-bold transition-all duration-300;
+      }
+      .btn-primary {
+        @apply bg-white text-black hover:bg-gray-200;
+      }
+      .btn-secondary {
+        @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-black;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-primary">
+<div class="flex flex-col h-screen justify-center items-center p-8 text-secondary text-center">
+<div class="flex-grow flex flex-col justify-center items-center">
+<svg class="w-24 h-24 mb-8" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"></path>
+<path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l-1.44-1.44C7.99 2.55 9.89 2 12 2c4.42 0 8 3.58 8 8 0 .28-.02.56-.05.83l-1.4.31c.03-.21.05-.42.05-.64z" fill="white" opacity="0.5"></path>
+</svg>
+<h1 class="text-4xl font-bold mb-4">Welcome!</h1>
+<p class="text-lg max-w-sm">
+          Your journey begins now. Let's get you checked in and ready to explore.
+        </p>
+</div>
+<div class="w-full max-w-md space-y-4">
+<button class="btn btn-primary" onclick="postMessageToReactNative('scan-qr')">
+<span class="material-symbols-outlined"> qr_code_scanner </span>
+          Scan QR Code
+        </button>
+<button class="btn btn-secondary" onclick="postMessageToReactNative('enter-travel-id')">
+<span class="material-symbols-outlined"> keypad </span>
+          Enter Travel ID
+        </button>
+</div>
+</div>
+<script>
+  function postMessageToReactNative(message) {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(message);
+    } else {
+      console.warn('ReactNativeWebView not found. Are you in a WebView environment?');
+    }
+  }
+</script>
+</body>
+</html>
