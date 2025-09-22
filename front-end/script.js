@@ -5,6 +5,36 @@ let tid = ""
 let detailsData = {}
 let serverIP = ""
 
+// HTML structure for Server finding page
+let serverFindingHTML = `
+    <div id="body-child">
+        <div id="animation">
+            <div id="animation2"></div>
+        </div>
+
+        <h4>Finding the server</h4>
+    </div>
+`
+
+// HTML structure for Server not found page
+let serverNotFoundHTML = `
+    <div id="body-child">
+        <div id="uh-oh">
+            <div id="eye1"></div>
+
+            <div id="eye2"></div>
+
+            <div id="mouth"></div>
+
+            <div id="tear"></div>
+        </div>
+
+        <h4>Server Not Found</h4>
+
+        <button id="closeExe">Exit</button>
+    </div>
+`
+
 // HTML structure for login screen
 let loginScreenHTML = `
     <div id="alertBox"></div>
@@ -238,6 +268,13 @@ let qrScreenHTML = `
     </div>
 `
 
+// Starting protocol
+
+let startingProtocolStatus;
+(async () => {
+    startingProtocolStatus = await startingProtocol()
+})()
+
 
 // Handles Screen change based on credential check
 async function handleChangeScreen(currentpage, nextpage){
@@ -407,3 +444,5 @@ async function handleDetails2QR(){
     document.getElementById("generateBtn").style.cursor = "pointer"
     document.getElementById("generateBtn").disabled = false
 }
+
+function startingProtocol(){}
