@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import requests, json
 
 class AsyncUtils:
@@ -12,6 +13,15 @@ class AsyncUtils:
 
 
 class widUtils:
+=======
+from server_config.findServer import FindServer
+import sys
+
+class AsyncUtils:
+
+    def closeExe(self):
+        sys.exit()
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
 
     def printer(self, text): print(text)
 
@@ -31,9 +41,23 @@ class widUtils:
                     if value == '': return False
 
         return True
+
+class WidUtils:
     
     def getServerIP(self):
         return self.serverIP
     
-    def __init__(self, serverIP):
-        self.serverIP = serverIP
+    def setServerIP(self):
+        
+        try:
+            self.server = FindServer()
+
+            return self.server.serverIPCopy
+
+        except AttributeError as e:
+            print(e, '\n', "Couldn't connect to the server. Check your connection")
+            
+            return 0
+    
+    def __init__(self):
+        self.serverIP = self.getServerIP()

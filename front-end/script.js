@@ -5,19 +5,34 @@ let tid = ""
 let detailsData = {}
 let serverIP = ""
 
+<<<<<<< HEAD
 let serverFindingHTML = `
     <div id="body-child">
         <div id="animation"></div>
 
         <div id="animation2"></div>
+=======
+// HTML structure for Server finding page
+let serverFindingHTML = `
+    <div id="body-child">
+        <div id="animation">
+            <div id="animation2"></div>
+        </div>
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
 
         <h4>Finding the server</h4>
     </div>
 `
 
+<<<<<<< HEAD
 // HTML structure for server not found
 let serverNotFoundHTML = `
     <div id="body-child2">
+=======
+// HTML structure for Server not found page
+let serverNotFoundHTML = `
+    <div id="body-child">
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
         <div id="uh-oh">
             <div id="eye1"></div>
 
@@ -319,6 +334,7 @@ let qrScreenHTML = `
     </div>
 `
 
+<<<<<<< HEAD
 let serverIPStatus = null
 let touristDetails = null
 
@@ -350,6 +366,15 @@ window.addEventListener("pywebviewready", async () => {
         touristDetails = null;
     }
 });
+=======
+// Starting protocol
+
+let startingProtocolStatus;
+(async () => {
+    startingProtocolStatus = await startingProtocol()
+})()
+
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
 
 // Handles Screen change based on credential check
 async function handleChangeScreen(currentpage, nextpage){
@@ -623,3 +648,5 @@ async function handleDetails2QR(){
     document.getElementById("generateBtn").style.cursor = "pointer"
     document.getElementById("generateBtn").disabled = false
 }
+
+function startingProtocol(){}

@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import webview, sys
 from ui.stylesheet import sheet
 from ui.utils.Utils import widUtils, AsyncUtils
+=======
+import webview
+from ui.stylesheet import sheet
+from ui.utils.Utils import WidUtils, AsyncUtils
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
 from backend.dataTransfer import DataTransfer
-from server_config.findServer import FindServer
 
 class TripPilot:
 
+<<<<<<< HEAD
     def __init__(self):
         # try:
         #     self.server = FindServer()
@@ -19,6 +25,13 @@ class TripPilot:
         self.dataTransfer = DataTransfer(self.serverIP)
         self.widutils = widUtils(self.serverIP)
         self.asyncUtils = AsyncUtils()
+=======
+    def getInstances(self):
+        self.widutils = WidUtils()
+        self.serverIP = self.widutils.serverIP
+        self.dataTransfer = DataTransfer(self.serverIP)
+        self.asyncutils = AsyncUtils()
+>>>>>>> 72871a44a6e2e1638e54fd1e4aefe3dcbfda5b99
 
 
 api = TripPilot()
