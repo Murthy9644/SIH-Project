@@ -32,7 +32,7 @@ class FindServer:
             print("Checking server for ", ipAdd)
 
             try:
-                request = requests.get(ipAdd + "/confirm", timeout=0.5)
+                request = requests.get(ipAdd + "/confirm", timeout=0.7)
                 print(request.text)
                 
                 if request.text == "confirm-listening on port 5500":

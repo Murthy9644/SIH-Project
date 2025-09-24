@@ -5,6 +5,35 @@ let tid = ""
 let detailsData = {}
 let serverIP = ""
 
+let serverFindingHTML = `
+    <div id="body-child">
+        <div id="animation"></div>
+
+        <div id="animation2"></div>
+
+        <h4>Finding the server</h4>
+    </div>
+`
+
+// HTML structure for server not found
+let serverNotFoundHTML = `
+    <div id="body-child2">
+        <div id="uh-oh">
+            <div id="eye1"></div>
+
+            <div id="eye2"></div>
+
+            <div id="mouth"></div>
+
+            <div id="tear"></div>
+        </div>
+
+        <h4>Server Not Found</h4>
+
+        <button id="closeExe">Exit</button>
+    </div>
+`
+
 // HTML structure for login screen
 let loginScreenHTML = `
     <div id="alertBox"></div>
@@ -54,7 +83,59 @@ let loginScreenHTML = `
                     </div>
                 </div>
                 
-                <button onclick="handleChangeScreen('loginScreen', 'detailsScreen')" id = "login-btn">Login</button>
+                <button id = "login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+`
+
+let loginBtn = document.getElementById("login-btn")
+if (loginBtn){
+    loginBtn.addEventListener("click", () => {
+        handleChangeScreen("loginScreen", "homeScreen")
+    })
+}
+
+// HTML structure for home screen
+let homeScreenHTML = `
+    <div id="homeScreen">
+        <div id="header">
+            <div id="title-block">
+                <div id="logo"></div>
+                
+                <div id="titles">
+                    <h4 id="title">Trip Pilot</h4>
+                    
+                    <p id="subtitle">Your Travel Companion</p>
+                </div>
+            </div>
+
+            <div id="profile">
+                <div id="profile-btn"><i class="fa-solid fa-user"></i></div>
+            </div>
+        </div>
+
+        <div id="home-body">
+            <div id="tools-block">
+                <div id="tools-text" class = "tool">
+                    <p>Create new Registration:</p>
+
+                    <p>Central resolver for Help Desk issues:</p>
+
+                    <p>Remove Tourist [Cancel tour]:</p>
+                </div>
+
+                <div id="tools-btn" class = "tool">
+                    <button id="new-reg-btn" class = "tool-btn"><i class="fa-solid fa-user-plus"></i> New Registration</button>
+
+                    <button id="control-desk-btn" class = "tool-btn"><i class="fa-solid fa-inbox"></i> Control Desk</button>
+
+                    <button id="remove-tourist-btn" class = "tool-btn"><i class="fa-solid fa-trash"></i> Remove Tourist</button>
+                </div>
+            </div>
+
+            <div id="touristwise-details">
+                
             </div>
         </div>
     </div>
@@ -145,8 +226,8 @@ let detailsScreenHTML = `
         </div>
     
         <div id="details-foot-buttons">
-            <button id = cancelBtn>Cancel</button>
-            <button id = generateBtn onclick = "handleDetails2QR()">Generate QR & Travel ID</button>
+            <button id = "cancelBtn">Cancel</button>
+            <button id = "generateBtn">Generate QR & Travel ID</button>
         </div>
     </div>
 `
@@ -238,6 +319,37 @@ let qrScreenHTML = `
     </div>
 `
 
+let serverIPStatus = null
+let touristDetails = null
+
+window.addEventListener("pywebviewready", async () => {
+    // document.getElementById("body").innerHTML = serverFindingHTML
+    // serverIPStatus = await window.pywebview.api.startFindingServer()
+
+    // if (serverIPStatus == "success"){
+    //     changePage("loginScreen", true)
+    // }
+    // else{
+    //     changePage("serverNotFound", true)
+
+    //     return
+    // }
+
+    try {
+        let touristsNdetails = await window.pywebview.api.asyncUtils.getTouristsNdetails();
+        window.pywebview.api.widutils.printer(touristsNdetails)
+
+        if (touristsNdetails == "null"){
+            window.pywebview.api.widutils.printer("Nulled")
+            touristDetails = null;
+        }
+
+        else touristDetails = JSON.parse(touristsNdetails);
+    } catch (err) {
+        window.pywebview.api.widutils.printer(err)
+        touristDetails = null;
+    }
+});
 
 // Handles Screen change based on credential check
 async function handleChangeScreen(currentpage, nextpage){
@@ -260,32 +372,136 @@ function changePage(page, credCheckStatus = true){
     if (! credCheckStatus) return
     
     switch (page){
+        case "serverNotFound":
+            let body_ = document.getElementById("body")
+            body_.innerHTML = serverNotFoundHTML
+
+            let closeExe = document.getElementById("closeExe")
+            if (closeExe){
+                closeExe.addEventListener("click", () => {
+                    window.close()
+                })
+            }
+            break
+
         case "loginScreen":
-                let body = document.getElementById("body")
-                body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
-                body.style.backgroundColor = "transparent"
-                body.innerHTML = loginScreenHTML
-                break
+            let body = document.getElementById("body")
+            body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
+            body.style.backgroundColor = "transparent"
+            body.innerHTML = loginScreenHTML
+            let loginBtn = document.getElementById("login-btn")
 
-            case "detailsScreen":
-                let body2 = document.getElementById("body")
-                body2.style.background = "none"
-                body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-                body2.innerHTML = detailsScreenHTML
-                break
+            if (loginBtn){
+                loginBtn.addEventListener("click", () => {
+                handleChangeScreen("loginScreen", "homeScreen")
+                })
+            }
 
-            case "qrScreen":
-                let body3 = document.getElementById("body")
-                body3.innerHTML = qrScreenHTML
-                document.getElementById("number").innerText = tid
-                document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
-                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
-                document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
-                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
-                document.getElementById("body").style.background = "none"
-                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-                document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
-                break
+            return
+
+        case "homeScreen":
+            let body1 = document.getElementById("body")
+            body1.innerHTML = homeScreenHTML
+            let newRegBtn = document.getElementById("new-reg-btn")
+
+            if (newRegBtn){
+                window.pywebview.api.widutils.printer("new reg btn activated")
+
+                newRegBtn.addEventListener("click", () => {
+                    window.pywebview.api.widutils.printer("new reg btn activated2")
+                    changePage("detailsScreen", true)
+                })
+            }
+
+            let controlDeskBtn = document.getElementById("control-desk-btn")
+            if (controlDeskBtn){
+                controlDeskBtn.addEventListener("click", () => {
+                    // alert("Control Desk feature coming soon!")
+                })
+            }
+
+            let removeTouristBtn = document.getElementById("remove-tourist-btn")
+            if (removeTouristBtn){
+                removeTouristBtn.addEventListener("click", () => {
+                    // alert("Remove Tourist feature coming soon!")
+                })
+            }
+
+            if (touristDetails == null) {
+                window.pywebview.api.widutils.printer("entered if in hscreen")
+                document.getElementById("touristwise-details").innerHTML = `<p style="color: white; text-align: center; margin-top: 20px;">No tourist data available.</p>`;
+            }
+
+            else {for (key in touristDetails){
+
+                let touristDiv = document.createElement("div")
+                touristDiv.id = "a-tourist"
+                touristDiv.innerHTML = `
+                <div id="a-tourist">
+                    <div id="name-tid">
+                        <h5 id="tourist-name">${touristDetails[key]["fullname"]}</h5>
+
+                        <p id="tourist-id">TID: ${key}</p>
+                    </div>
+                        
+                    <div id="date">
+                        <p id="from-date">From: ${touristDetails[key]["duration"][0]}</p>
+                            
+                        <p id="to-date">To: ${touristDetails[key]["duration"][1]}</p>
+                    </div>
+
+                    <button id="go-to-details">Details</button>
+                    <button id="notifi-btn"><i class="fa-solid fa-bell"></i></button>
+                </div>
+                `
+
+                document.getElementById("touristwise-details").appendChild(touristDiv)
+            }}
+
+            break
+
+        case "detailsScreen":
+            let body2 = document.getElementById("body")
+            body2.style.background = "none"
+            body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+            body2.innerHTML = detailsScreenHTML
+
+            document.getElementById("cancelBtn").addEventListener("click", () => {
+                changePage("homeScreen", true)
+            })
+
+            document.getElementById("details-back-btn").addEventListener("click", () => {
+                changePage("loginScreen", true)
+            })
+
+            document.getElementById("generateBtn").addEventListener("click", () => {
+                handleDetails2QR()
+            })
+
+            break
+
+        case "qrScreen":
+            let body3 = document.getElementById("body")
+            body3.innerHTML = qrScreenHTML
+
+            document.getElementById("back-btn").addEventListener("click", () => {
+                changePage("detailsScreen", true)
+            })
+
+            document.getElementById("New-reg-btn").addEventListener("click", () => {
+                changePage("detailsScreen", true)
+            })
+
+
+            document.getElementById("number").innerText = tid
+            document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
+            document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
+            document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
+            document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
+            document.getElementById("body").style.background = "none"
+            document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+            document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
+            break
     }
 }
 

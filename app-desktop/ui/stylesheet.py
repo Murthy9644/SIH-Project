@@ -20,6 +20,35 @@ sheet = '''
 		    }
 		}
 		
+		@keyframes grow {
+		    0%{
+		        height: 90px;
+		        width: 90px;
+		        opacity: 1;
+		    }
+		    100%{
+		        height: 120px;
+		        width: 120px;
+		        opacity: 0;
+		    }
+		}
+		
+		@keyframes fall {
+		    0%{
+		        top: 17px;
+		        opacity: 1;
+		    }
+		    50%{
+		        top: 40px;
+		        opacity: 0;
+		    }
+		    100%{
+		        opacity: 0;
+		    }
+		}
+		
+		/* Global Styles */
+		
 		body{
 		    padding: 0;
 		    margin: 0;
@@ -63,6 +92,133 @@ sheet = '''
 		    padding: 5px;
 		    border-radius: 8px;
 		    color: white;
+		}
+		
+		/* Server finding screen */
+		
+		#body-child{
+		    height: 100vh;
+		    width: 100vw;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    flex-direction: column;
+		    gap: 20px;
+		    background: linear-gradient(to bottom right, rgb(186, 25, 226), rgb(25, 72, 226), rgb(186, 25, 226));
+		}
+		
+		#animation{
+		    height: 90px;
+		    width: 90px;
+		    border: 10px solid rgba(255, 255, 255, 0.2);
+		    border-radius: 50%;
+		    animation: spin 1s linear infinite;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    animation: grow 1s ease-in-out infinite;
+		}
+		
+		#animation2{
+		    height: 100px;
+		    width: 100px;
+		    background-image: url("http://172.20.113.56:5500/getLogo");
+		    background-size: cover;
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    border-radius: 50%;
+		    position: fixed;
+		    animation: glow 2s ease-in-out infinite;
+		}
+		
+		#body-child h4{
+		    color: white;
+		    font-size: 18px;
+		    position: fixed;
+		    top: 60%;
+		    letter-spacing: 1px;
+		}
+		
+		/* Server not found */
+		
+		#body-child2{
+		    height: 100vh;
+		    width: 100vw;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    flex-direction: column;
+		    gap: 20px;
+		    background: linear-gradient(to bottom right, rgb(186, 25, 226), rgb(25, 72, 226), rgb(186, 25, 226));
+		}
+		
+		#uh-oh{
+		    height: 100px;
+		    width: 100px;
+		    border: 4px solid rgb(255, 255, 255);
+		    border-radius: 50%;
+		    filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.5));
+		}
+		
+		#eye1, #eye2{
+		    height: 10px;
+		    width: 25px;
+		    border-bottom: 4px solid rgb(255, 255, 255);
+		    border-radius: 50%;
+		}
+		
+		#eye1{
+		    position: relative;
+		    top: 30px;
+		    left: 20px;
+		}
+		
+		#eye2{
+		    position: absolute;
+		    top: 30px;
+		    right: 20px;
+		}
+		
+		#mouth{
+		    height: 10px;
+		    width: 20px;
+		    border-radius: 50%;
+		    border-top: 4px solid rgb(255, 255, 255);
+		    position: relative;
+		    top: 50px;
+		    left: 50%;
+		    transform: translate(-50%, 0%);
+		}
+		
+		#tear{
+		    height: 15px;
+		    width: 5px;
+		    border-radius: 50%;
+		    background-color: rgb(255, 255, 255);
+		    position: relative;
+		    top: 17px;
+		    left: 25px;
+		    transform: translate(-50%, 0%);
+		    animation: fall 1.5s ease-out infinite;
+		}
+		
+		#body-child2 h4{
+		    color: white;
+		    font-size: 18px;
+		}
+		
+		#closeExe{
+		    height: 30px;
+		    width: 80px;
+		    border: none;
+		    background-color: rgba(46, 164, 211, 0.3);
+		    color: white;
+		    border-radius: 8px;
+		    cursor: pointer;
+		}#closeExe:hover{
+		    background-color: rgb(88, 145, 168);
+		}#closeExe:focus{
+		    outline: 1px solid rgb(151, 146, 146);
 		}
 		
 		
@@ -231,6 +387,192 @@ sheet = '''
 		    background-color: rgb(23, 136, 177);
 		}#login-btn:focus{
 		    outline: 1px solid black;
+		}
+		
+		
+		/* Home Screen */
+		
+		#homeScreen{
+		    height: auto;
+		    width: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: space-evenly;
+		    background-color: rgb(218, 218, 226);
+		}
+		
+		#header{
+		    height: 80px;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-between;
+		    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		    position: relative;
+		    top: 0px;
+		    z-index: 998;
+		    background-color: rgb(24, 99, 129);
+		    z-index: 998;
+		    color: white;
+		}
+		
+		#logo{
+		    background-image: url("http://172.20.113.56:5500/getLogo");
+		    height: 60px;
+		    width: 60px;
+		    border-radius: 50%;
+		    background-size: cover;
+		    background-position: center;
+		    background-repeat: no-repeat;
+		}
+		
+		#title-block{
+		    display: flex;
+		    justify-content: center;
+		    padding-left: 20px;
+		    line-height: 0;
+		    cursor: pointer;
+		    gap: 10px;
+		}
+		
+		#profile{
+		    margin-right: 20px;
+		    cursor: pointer;
+		    font-size: 20px;
+		    height: 30px;
+		    width: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    border: 2px solid white;
+		    border-radius: 50%;
+		}
+		
+		#home-body{
+		    height: 100vh;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-evenly;
+		    flex-direction: column;
+		    padding-top: 80px;
+		    gap: 20px;
+		    margin-bottom: 50px;
+		}
+		
+		#tools-block{
+		    height: 50%;
+		    width: 80%;
+		    background-color: white;
+		    border: 20px solid rgba(157, 157, 201, 0.2);
+		    border-radius: 8px;
+		    filter: drop-shadow(1px 1px 15px rgba(0, 0, 0, 0.1));
+		    padding: 30px;
+		    display: flex;
+		    justify-content: space-evenly;
+		    gap: 20px;
+		    margin-bottom: 20px;
+		}
+		
+		#tools-text{
+		    height: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    line-height: 0px;
+		    justify-content: space-evenly;
+		}
+		
+		#tools-btn{
+		    height: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    line-height: 0px;
+		    justify-content: space-evenly;
+		}
+		
+		.tool-btn{
+		    height: 35px;
+		    width: auto;
+		    border: none;
+		    background-color: rgb(25, 169, 226);
+		    color: white;
+		    border-radius: 8px;
+		    cursor: pointer;
+		    padding-left: 15px;
+		    padding-right: 15px;
+		}.tool-btn:hover{
+		    background-color: rgb(23, 136, 177);
+		}.tool-btn:focus{
+		    outline: 1px solid black;
+		}
+		
+		#touristwise-details{
+		    height: auto;
+		    width: 90%;
+		    background-color: white;
+		    padding: 20px;
+		    border-radius: 8px;
+		    filter: drop-shadow(1px 1px 15px rgba(0, 0, 0, 0.1));
+		    overflow-x: auto;
+		    display: flex;
+		    flex-direction: column;
+		    gap: 5px;
+		}
+		
+		#a-tourist{
+		    height: 100%;
+		    width: 100%;
+		    display: flex;
+		    align-items: center;
+		    justify-content: space-around;
+		    background-color: rgba(185, 184, 184, 0.3);
+		    margin-bottom: 20px;
+		}
+		
+		#name-tid{
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: center;
+		}
+		
+		#tourist-name{
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#date{
+		    display: flex;
+		    gap: 10px;
+		    line-height: 0px;
+		    font-size: 12px;
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		#go-to-details{
+		    height: 30px;
+		    width: 80px;
+		    border: none;
+		    background-color: rgb(25, 169, 226);
+		    color: white;
+		    border-radius: 8px;
+		    cursor: pointer;
+		}#go-to-details:hover{
+		    background-color: rgb(23, 136, 177);
+		}#go-to-details:focus{
+		    outline: 1px solid black;
+		}
+		
+		#notifi-btn{
+		    font-size: 18px;
+		    border: 2px solid black;
+		    border-radius: 50%;
+		    height: 30px;
+		    width: 30px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    cursor: pointer;
 		}
 		
 		
@@ -720,7 +1062,7 @@ sheet = '''
                     </div>
                 </div>
                 
-                <button onclick="handleChangeScreen('loginScreen', 'detailsScreen')" id = "login-btn">Login</button>
+                <button id = "login-btn">Login</button>
             </div>
         </div>
     </div>
@@ -732,6 +1074,35 @@ sheet = '''
 		let tid = ""
 		let detailsData = {}
 		let serverIP = ""
+		
+		let serverFindingHTML = `
+		    <div id="body-child">
+		        <div id="animation"></div>
+		
+		        <div id="animation2"></div>
+		
+		        <h4>Finding the server</h4>
+		    </div>
+		`
+		
+		// HTML structure for server not found
+		let serverNotFoundHTML = `
+		    <div id="body-child2">
+		        <div id="uh-oh">
+		            <div id="eye1"></div>
+		
+		            <div id="eye2"></div>
+		
+		            <div id="mouth"></div>
+		
+		            <div id="tear"></div>
+		        </div>
+		
+		        <h4>Server Not Found</h4>
+		
+		        <button id="closeExe">Exit</button>
+		    </div>
+		`
 		
 		// HTML structure for login screen
 		let loginScreenHTML = `
@@ -782,7 +1153,59 @@ sheet = '''
 		                    </div>
 		                </div>
 		                
-		                <button onclick="handleChangeScreen('loginScreen', 'detailsScreen')" id = "login-btn">Login</button>
+		                <button id = "login-btn">Login</button>
+		            </div>
+		        </div>
+		    </div>
+		`
+		
+		let loginBtn = document.getElementById("login-btn")
+		if (loginBtn){
+		    loginBtn.addEventListener("click", () => {
+		        handleChangeScreen("loginScreen", "homeScreen")
+		    })
+		}
+		
+		// HTML structure for home screen
+		let homeScreenHTML = `
+		    <div id="homeScreen">
+		        <div id="header">
+		            <div id="title-block">
+		                <div id="logo"></div>
+		                
+		                <div id="titles">
+		                    <h4 id="title">Trip Pilot</h4>
+		                    
+		                    <p id="subtitle">Your Travel Companion</p>
+		                </div>
+		            </div>
+		
+		            <div id="profile">
+		                <div id="profile-btn"><i class="fa-solid fa-user"></i></div>
+		            </div>
+		        </div>
+		
+		        <div id="home-body">
+		            <div id="tools-block">
+		                <div id="tools-text" class = "tool">
+		                    <p>Create new Registration:</p>
+		
+		                    <p>Central resolver for Help Desk issues:</p>
+		
+		                    <p>Remove Tourist [Cancel tour]:</p>
+		                </div>
+		
+		                <div id="tools-btn" class = "tool">
+		                    <button id="new-reg-btn" class = "tool-btn"><i class="fa-solid fa-user-plus"></i> New Registration</button>
+		
+		                    <button id="control-desk-btn" class = "tool-btn"><i class="fa-solid fa-inbox"></i> Control Desk</button>
+		
+		                    <button id="remove-tourist-btn" class = "tool-btn"><i class="fa-solid fa-trash"></i> Remove Tourist</button>
+		                </div>
+		            </div>
+		
+		            <div id="touristwise-details">
+		                
 		            </div>
 		        </div>
 		    </div>
@@ -873,8 +1296,8 @@ sheet = '''
 		        </div>
 		    
 		        <div id="details-foot-buttons">
-		            <button id = cancelBtn>Cancel</button>
-		            <button id = generateBtn onclick = "handleDetails2QR()">Generate QR & Travel ID</button>
+		            <button id = "cancelBtn">Cancel</button>
+		            <button id = "generateBtn">Generate QR & Travel ID</button>
 		        </div>
 		    </div>
 		`
@@ -966,6 +1389,37 @@ sheet = '''
 		    </div>
 		`
 		
+		let serverIPStatus = null
+		let touristDetails = null
+		
+		window.addEventListener("pywebviewready", async () => {
+		    // document.getElementById("body").innerHTML = serverFindingHTML
+		    // serverIPStatus = await window.pywebview.api.startFindingServer()
+		
+		    // if (serverIPStatus == "success"){
+		    //     changePage("loginScreen", true)
+		    // }
+		    // else{
+		    //     changePage("serverNotFound", true)
+		
+		    //     return
+		    // }
+		
+		    try {
+		        let touristsNdetails = await window.pywebview.api.asyncUtils.getTouristsNdetails();
+		        window.pywebview.api.widutils.printer(touristsNdetails)
+		
+		        if (touristsNdetails == "null"){
+		            window.pywebview.api.widutils.printer("Nulled")
+		            touristDetails = null;
+		        }
+		
+		        else touristDetails = JSON.parse(touristsNdetails);
+		    } catch (err) {
+		        window.pywebview.api.widutils.printer(err)
+		        touristDetails = null;
+		    }
+		});
 		
 		// Handles Screen change based on credential check
 		async function handleChangeScreen(currentpage, nextpage){
@@ -988,32 +1442,136 @@ sheet = '''
 		    if (! credCheckStatus) return
 		    
 		    switch (page){
+		        case "serverNotFound":
+		            let body_ = document.getElementById("body")
+		            body_.innerHTML = serverNotFoundHTML
+		
+		            let closeExe = document.getElementById("closeExe")
+		            if (closeExe){
+		                closeExe.addEventListener("click", () => {
+		                    window.close()
+		                })
+		            }
+		            break
+		
 		        case "loginScreen":
-		                let body = document.getElementById("body")
-		                body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
-		                body.style.backgroundColor = "transparent"
-		                body.innerHTML = loginScreenHTML
-		                break
+		            let body = document.getElementById("body")
+		            body.style.background = "linear-gradient(to bottom right, rgb(25, 169, 226), rgb(25, 72, 226), rgb(25, 169, 226))"
+		            body.style.backgroundColor = "transparent"
+		            body.innerHTML = loginScreenHTML
+		            let loginBtn = document.getElementById("login-btn")
 		
-		            case "detailsScreen":
-		                let body2 = document.getElementById("body")
-		                body2.style.background = "none"
-		                body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-		                body2.innerHTML = detailsScreenHTML
-		                break
+		            if (loginBtn){
+		                loginBtn.addEventListener("click", () => {
+		                handleChangeScreen("loginScreen", "homeScreen")
+		                })
+		            }
 		
-		            case "qrScreen":
-		                let body3 = document.getElementById("body")
-		                body3.innerHTML = qrScreenHTML
-		                document.getElementById("number").innerText = tid
-		                document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
-		                document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
-		                document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
-		                document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
-		                document.getElementById("body").style.background = "none"
-		                document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
-		                document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
-		                break
+		            return
+		
+		        case "homeScreen":
+		            let body1 = document.getElementById("body")
+		            body1.innerHTML = homeScreenHTML
+		            let newRegBtn = document.getElementById("new-reg-btn")
+		
+		            if (newRegBtn){
+		                window.pywebview.api.widutils.printer("new reg btn activated")
+		
+		                newRegBtn.addEventListener("click", () => {
+		                    window.pywebview.api.widutils.printer("new reg btn activated2")
+		                    changePage("detailsScreen", true)
+		                })
+		            }
+		
+		            let controlDeskBtn = document.getElementById("control-desk-btn")
+		            if (controlDeskBtn){
+		                controlDeskBtn.addEventListener("click", () => {
+		                    // alert("Control Desk feature coming soon!")
+		                })
+		            }
+		
+		            let removeTouristBtn = document.getElementById("remove-tourist-btn")
+		            if (removeTouristBtn){
+		                removeTouristBtn.addEventListener("click", () => {
+		                    // alert("Remove Tourist feature coming soon!")
+		                })
+		            }
+		
+		            if (touristDetails == null) {
+		                window.pywebview.api.widutils.printer("entered if in hscreen")
+		                document.getElementById("touristwise-details").innerHTML = `<p style="color: white; text-align: center; margin-top: 20px;">No tourist data available.</p>`;
+		            }
+		
+		            else {for (key in touristDetails){
+		
+		                let touristDiv = document.createElement("div")
+		                touristDiv.id = "a-tourist"
+		                touristDiv.innerHTML = `
+		                <div id="a-tourist">
+		                    <div id="name-tid">
+		                        <h5 id="tourist-name">${touristDetails[key]["fullname"]}</h5>
+		
+		                        <p id="tourist-id">TID: ${key}</p>
+		                    </div>
+		                        
+		                    <div id="date">
+		                        <p id="from-date">From: ${touristDetails[key]["duration"][0]}</p>
+		                            
+		                        <p id="to-date">To: ${touristDetails[key]["duration"][1]}</p>
+		                    </div>
+		
+		                    <button id="go-to-details">Details</button>
+		                    <button id="notifi-btn"><i class="fa-solid fa-bell"></i></button>
+		                </div>
+		                `
+		
+		                document.getElementById("touristwise-details").appendChild(touristDiv)
+		            }}
+		
+		            break
+		
+		        case "detailsScreen":
+		            let body2 = document.getElementById("body")
+		            body2.style.background = "none"
+		            body2.style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+		            body2.innerHTML = detailsScreenHTML
+		
+		            document.getElementById("cancelBtn").addEventListener("click", () => {
+		                changePage("homeScreen", true)
+		            })
+		
+		            document.getElementById("details-back-btn").addEventListener("click", () => {
+		                changePage("loginScreen", true)
+		            })
+		
+		            document.getElementById("generateBtn").addEventListener("click", () => {
+		                handleDetails2QR()
+		            })
+		
+		            break
+		
+		        case "qrScreen":
+		            let body3 = document.getElementById("body")
+		            body3.innerHTML = qrScreenHTML
+		
+		            document.getElementById("back-btn").addEventListener("click", () => {
+		                changePage("detailsScreen", true)
+		            })
+		
+		            document.getElementById("New-reg-btn").addEventListener("click", () => {
+		                changePage("detailsScreen", true)
+		            })
+		
+		
+		            document.getElementById("number").innerText = tid
+		            document.getElementById("tourist-details").children[1].children[1].innerText = detailsData["fullname"]
+		            document.getElementById("tourist-details").children[2].children[1].innerText = detailsData["phoneNo"]
+		            document.getElementById("tourist-details").children[3].children[1].innerText = detailsData["destination"]
+		            document.getElementById("tourist-details").children[4].children[1].innerText = `${detailsData["duration"][0]} to ${detailsData["duration"][1]}`
+		            document.getElementById("body").style.background = "none"
+		            document.getElementById("body").style.backgroundColor = "rgba(157, 157, 201, 0.2)"
+		            document.getElementById("qr-code-image").style.backgroundImage = `url(${serverIP}/getQr/${tid}.png)`
+		            break
 		    }
 		}
 		
